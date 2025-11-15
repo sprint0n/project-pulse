@@ -11,9 +11,15 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           activate-environment: cs3030
+          environment-file: environment.yml
           python-version: 3.11
-      - name: Install Dependencies
+          auto-activate-base: false
+      - name: Verify Environment
+        shell: bash -l {0}
         run: |
-          conda install pytest -y
+          conda list
+          which python
+          python --version
       - name: Run Tests
+        shell: bash -l {0}
         run: pytest -v
